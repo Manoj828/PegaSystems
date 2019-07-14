@@ -18,12 +18,10 @@ import com.qa.pgsys.util.WebEventListener;
 
 public class TestBase {
 	
-	
-
 	public static WebDriver driver;
 	public static Properties prop;
 	public static EventFiringWebDriver e_driver;
-    public static WebEventListener eventListener;
+        public static WebEventListener eventListener;
 	
 	
 	String File_Path ="C:\\Users\\Admin\\eclipse-workspace\\PegaSysTestAutomation\\src\\main\\java\\com\\qa\\pgsys\\confi\\Config.properties"; 
@@ -58,22 +56,20 @@ public class TestBase {
 			driver=new FirefoxDriver();
 		}
 		
-	// to create detailed logs
+	         // to create detailed logs
 	 e_driver=new EventFiringWebDriver(driver);
 	 eventListener=new WebEventListener();
 	 e_driver.register(eventListener);
 	 driver = e_driver;
 		
+	 driver.manage().window().maximize();
+         driver.manage().deleteAllCookies();
+	 driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+	 driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 		
 		
+         driver.get(prop.getProperty("url"));		
 		
-		driver.manage().window().maximize();
-		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
-		
-		
-		driver.get(prop.getProperty("url"));
 		
 	}
 	
